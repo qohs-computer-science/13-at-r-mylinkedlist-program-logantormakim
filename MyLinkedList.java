@@ -25,9 +25,23 @@ public class MyLinkedList
     } // end isEmpty
 
     public boolean add(Object newItem) {
-        ListNode temp = head
+        ListNode temp = head;
         int size1 = temp.size();
         while (temp.getNext() != null) {
+            temp=temp.getNext();
+        }
+        temp.set(newItem);
+        if (size1!= head.size()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    } // end add
+
+    public boolean addFirst(Object newItem) {
+        ListNode temp = head;
+        for (int x = 0; x < head.size(); x++) {
             
         }
     }
