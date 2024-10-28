@@ -24,6 +24,7 @@ public class MyLinkedList
         }
     } // end isEmpty
 
+
     public boolean add(Object newItem) {
         ListNode temp = head;
         int size1 = temp.size();
@@ -40,11 +41,67 @@ public class MyLinkedList
     } // end add
 
     public boolean addFirst(Object newItem) {
+            head = new ListNode(newItem,head) 
+                return true;
+        } // end addFirst
+
+    public boolean addLast(Object newItem) {
+            add(newItem);
+            return true;
+    } // end addLast
+
+    public Object get(int i) {
         ListNode temp = head;
-        for (int x = 0; x < head.size(); x++) {
-            
+        if (i < 0 || i >= size()) {
+            throw new IndexOutOfBoundsException();
         }
-    }
+        else {
+            for (int x = 0; x<i; x++) {
+                temp= temp.getNext();
+            } // end for loop
+            return temp.getValue();
+        } // end else
+    } // end get
+
+    public Object set(int i, Object newValue) {
+        ListNode temp = head;
+        if (i <= head.size() || i >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        else {
+            for (int x = 0; x<i;x++) {
+                temp = temp.getNext();
+            }
+        Object setVal = temp.setValue();
+        temp.setValue(newValue);
+        return setVal;
+        } // end else
+    } // end set
+
+    public Object remove(int i) {
+        ListNode temp = head;
+        if (i <= head.size() || i >= size()) {
+            throw new IndexOutOfBoundsException();
+        } 
+        else {
+            for (int x = 0; x<i;x++) {
+                head=head.getNext();
+            }
+            temp.setNext(null);
+        }
+    } // end remove
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -55,11 +112,11 @@ public class MyLinkedList
     public String toString (){
         ListNode temp = head;
         out = "";
-        int val =1;
+        int num =1;
         while (temp.getNext() != null) {
-            out+= val +":" + temp.getNext();
+            out+= num +":" + temp.getNext();
             System.out.println(" ");
-            val++;
+            num++;
             temp.getNext();
         }
         return out;
