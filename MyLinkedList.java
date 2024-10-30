@@ -80,33 +80,48 @@ public class MyLinkedList
 
     public Object remove(int i) {
         ListNode temp = head;
+        ListNode temp2 = head
         if (i <= head.size() || i >= size()) {
             throw new IndexOutOfBoundsException();
         } 
         else {
             for (int x = 0; x<i;x++) {
-                head=head.getNext();
+                temp=temp.getNext();
             }
-            temp.setNext(null);
+            temp2 = temp.getNext();
+            temp.getNext(temp2.getNext());
+            Object removeReturnValue = temp2.getValue();
+            temp2.setNext(null);
+            size = size-1;
+            return removeReturnValue; 
         }
     } // end remove
 
+    public Object removeFirst() {
+        if (size ==0) {
+            return null;
+        } // end if
+        Object removeFirstReturnValue = temp2.getNext();
+        ListNode temp = head;
+        ListNode temp2= head;
+        temp=temp.getNext();
+        temp2.setNext(null);
+        size--;
+        return removeFirstReturnValue; 
+    } // end remove first
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public Object removeLast() {
+        ListNode temp = head;
+        if (size == 0 ) {
+            return null; 
+        } // end if
+        while (temp.getNext().getNext() != null) {
+                temp.getNext();
+        }
+        Object removeLastReturnValue = temp.getNext().getValue();
+        temp.setNext(null);
+        size--;
+    } // end removeLast
 
     //to string
     public String toString (){
