@@ -1,10 +1,11 @@
 // Logan Torma-Kim
 // 10/23/2024
 // pd 3
+// Many methods to manipulate lists like removing, adding, etc
 public class MyLinkedList
 {
     private ListNode head;
-    private ListNode size;
+    private int  size;
     public MyLinkedList() {
         head = null; // when head = null list is empty
         size = 0;
@@ -24,29 +25,31 @@ public class MyLinkedList
         }
     } // end isEmpty
 
-
     public boolean add(Object newItem) {
         ListNode temp = head;
-        int size1 = temp.size();
-        while (temp.getNext() != null) {
-            temp=temp.getNext();
-        }
-        temp.set(newItem);
-        if (size1!= head.size()) {
-            return true;
+        if (size ==0) {
+            head = new ListNode(newItem, null);
         }
         else {
-            return false;
+            while (temp.getNext() != null) {
+                temp=temp.getNext();
+            }
+                temp.setNext(new ListNode(newItem, null));
+            
         }
+        size++;
+        return true;
     } // end add
 
     public boolean addFirst(Object newItem) {
-            head = new ListNode(newItem,head) 
+            head = new ListNode(newItem,head);
+            size++;
                 return true;
         } // end addFirst
 
     public boolean addLast(Object newItem) {
             add(newItem);
+            size++;
             return true;
     } // end addLast
 
@@ -65,14 +68,14 @@ public class MyLinkedList
 
     public Object set(int i, Object newValue) {
         ListNode temp = head;
-        if (i <= head.size() || i >= size()) {
+        if (i >= size || i >= size()) {
             throw new IndexOutOfBoundsException();
         }
         else {
             for (int x = 0; x<i;x++) {
                 temp = temp.getNext();
             }
-        Object setVal = temp.setValue();
+        Object setVal = temp.getValue();
         temp.setValue(newValue);
         return setVal;
         } // end else
@@ -80,8 +83,8 @@ public class MyLinkedList
 
     public Object remove(int i) {
         ListNode temp = head;
-        ListNode temp2 = head
-        if (i <= head.size() || i >= size()) {
+        ListNode temp2 = head;
+        if (i < 0 || i >= size()) {
             throw new IndexOutOfBoundsException();
         } 
         else {
@@ -89,7 +92,7 @@ public class MyLinkedList
                 temp=temp.getNext();
             }
             temp2 = temp.getNext();
-            temp.getNext(temp2.getNext());
+            temp.setNext(temp2.getNext());
             Object removeReturnValue = temp2.getValue();
             temp2.setNext(null);
             size = size-1;
@@ -98,14 +101,13 @@ public class MyLinkedList
     } // end remove
 
     public Object removeFirst() {
+        ListNode temp = head;
         if (size ==0) {
             return null;
         } // end if
-        Object removeFirstReturnValue = temp2.getNext();
-        ListNode temp = head;
-        ListNode temp2= head;
-        temp=temp.getNext();
-        temp2.setNext(null);
+        Object removeFirstReturnValue = temp.getValue();
+        head=head.getNext();
+        temp.setNext(null);
         size--;
         return removeFirstReturnValue; 
     } // end remove first
@@ -116,23 +118,23 @@ public class MyLinkedList
             return null; 
         } // end if
         while (temp.getNext().getNext() != null) {
-                temp.getNext();
-        }
+               temp= temp.getNext();
+        } // end while
         Object removeLastReturnValue = temp.getNext().getValue();
         temp.setNext(null);
         size--;
+        return removeLastReturnValue;
     } // end removeLast
 
     //to string
     public String toString (){
         ListNode temp = head;
-        out = "";
+        String out = "";
         int num =1;
-        while (temp.getNext() != null) {
-            out+= num +":" + temp.getNext();
-            System.out.println(" ");
+        while (temp != null) {
+            out+= num +": " + temp.getValue() + "\n";
             num++;
-            temp.getNext();
+           temp=temp.getNext();
         }
         return out;
     } // end toString
